@@ -9,10 +9,8 @@ interface Props {
 export const TitleComponent = ({ title }: Props) => {
   const { height } = useWindowDimensions();
   return (
-    <View style={{ height: height * 0.20, justifyContent: 'center' }}>
-      <Text style={StylesGlobal.title}>
-        {title}
-      </Text>
+    <View style={{ height: height * 0.12, justifyContent: "center" }}>
+      <Text style={StylesGlobal.title}>{title}</Text>
     </View>
   );
 };

@@ -1,4 +1,4 @@
-export const PRIMARY_COLOR = "#195134";
-export const SECUNDARY_COLOR = "white";
-export const TERTIARY_COLOR = "#70d561";
-export const QUARTERNARY_COLOR = '#F1F4F5'; 
+export const PRIMARY_COLOR = "#0D2C44"; // Azul Marino Empresarial
+export const SECONDARY_COLOR = "#FFFFFF";
+export const TERTIARY_COLOR = "#2A9D8F"; // Verde Azulado para botones
+export const QUARTERNARY_COLOR = "#F8F9FA"; // Gris muy claro para inputs

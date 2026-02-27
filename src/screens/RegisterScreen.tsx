@@ -1,17 +1,21 @@
 import React, { useState } from "react";
-import { StatusBar, Text, View, Alert } from "react-native";
+import { Alert, StatusBar, Text, View } from "react-native";
+import { StackScreenProps } from "@react-navigation/stack";
+import { User, RootStackParamList } from "../navigator/StackNavigator";
+import { PRIMARY_COLOR } from "../commons/constants";
 import { TitleComponent } from "../components/TitleComponent";
 import { BodyComponent } from "../components/BodyComponent";
-import { PRIMARY_COLOR } from "../commons/constants";
-import { StylesGlobal } from "../theme/appTheme";
 import { InputComponent } from "../components/InputComponent";
 import { ButtonComponent } from "../components/ButtonComponent";
-import { StackScreenProps } from "@react-navigation/stack";
+import { StylesGlobal } from "../theme/appTheme";
 
-interface Props extends StackScreenProps<any, any> {}
+// Definimos la interfaz sin 'any'
+interface Props extends StackScreenProps<RootStackParamList, "Register"> {
+  handleAddUser: (user: User) => void;
+}
 
-export const RegisterScreen = ({ navigation }: Props) => {
-  const [formRegister, setFormRegister] = useState({
+export const RegisterScreen = ({ navigation, handleAddUser }: Props) => {
+  const [formRegister, setFormRegister] = useState<User>({
     nombre: "",
     email: "",
     telefono: "",
@@ -23,19 +27,34 @@ export const RegisterScreen = ({ navigation }: Props) => {
   };
 
   const handleRegister = () => {
-    // Mostrar en CMD la información capturada
-    console.log("--- DATOS DE REGISTRO ---");
-    console.log(formRegister);
-    Alert.alert("Usuario Registrado Exitosamente");
+    // Verificación de campos vacíos
+    if (!formRegister.nombre || !formRegister.email || !formRegister.password) {
+      Alert.alert("Error", "Por favor, llene todos los campos obligatorios");
+      return;
+    }
+
+    // --- CAPTURA DE DATOS EN CMD ---
+    console.log("================================");
+    console.log("NUEVO USUARIO REGISTRADO");
+    console.log("Nombre:", formRegister.nombre);
+    console.log("Email:", formRegister.email);
+    console.log("Teléfono:", formRegister.telefono);
+    console.log("Password:", formRegister.password);
+    console.log("================================");
+
+    // Guardar en el estado global
+    handleAddUser(formRegister);
+
+    Alert.alert("Éxito", "Usuario Registrado Exitosamente");
     navigation.navigate("Login");
   };
 
   return (
-    <View>
+    <View style={{ flex: 1 }}>
       <StatusBar backgroundColor={PRIMARY_COLOR} />
-      <TitleComponent title="Papelería El Fortín" />
+      <TitleComponent title="Registro de Usuario" />
       <BodyComponent>
-        <Text style={StylesGlobal.titleWelcome}>Crea tu cuenta de registro</Text>
+        <Text style={StylesGlobal.titleWelcome}>Crea tu nueva cuenta</Text>
         <View style={{ marginVertical: 10 }}>
           <InputComponent
             placeholder="Nombre Completo"

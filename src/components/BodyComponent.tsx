@@ -13,12 +13,10 @@ export const BodyComponent = ({ children }: Props) => {
     <View
       style={{
         ...StylesGlobal.ContainerBody,
-        height: height * 0.80,
+        height: height * 0.8,
       }}
     >
-      <ScrollView showsVerticalScrollIndicator={false}>
-        {children}
-      </ScrollView>
+      <ScrollView showsVerticalScrollIndicator={false}>{children}</ScrollView>
     </View>
   );
 };

@@ -9,8 +9,8 @@ interface Props {
 
 export const ButtonComponent = ({ buttonText, onPress }: Props) => {
   return (
-    <TouchableOpacity 
-      style={StylesGlobal.button} 
+    <TouchableOpacity
+      style={StylesGlobal.button}
       onPress={onPress}
       activeOpacity={0.8}
     >
